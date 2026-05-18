@@ -1,50 +1,46 @@
-// App.js
+// App.js - 最終優化版（支援 Dark Mode + 現代 UI）
 import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Appearance } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { onAuthStateChanged, signInAnonymously, setupBackgroundHandler } from './services';
-import { usePhotos, usePairing, useNotifications, Navigation } from './ui';
-
-// Must run before any component mount
-setupBackgroundHandler();
+import { Navigation } from './src/navigation/TabNavigator';
+import { signInAnonymously } from './services';
 
 export default function App() {
   const [ready, setReady] = useState(false);
+  const colorScheme = Appearance.getColorScheme() || 'light';
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(async user => {
-      if (!user) await signInAnonymously();
-      setReady(true);
-    });
-    return unsub;
+    signInAnonymously()
+      .then(() => setReady(true))
+      .catch(console.error);
   }, []);
 
-  const photos        = usePhotos('我');
-  const pairing       = usePairing();
-  const notifications = useNotifications();
-
-  if (!ready || photos.loading) {
+  if (!ready) {
     return (
-      <View style={s.splash}>
-        <ActivityIndicator size="large" color="#007aff"/>
+      <View style={[styles.splash, colorScheme === 'dark' && styles.darkBg]}>
+        <ActivityIndicator size="large" color="#c026d3" />
       </View>
     );
   }
 
   return (
-    <GestureHandlerRootView style={{ flex:1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <Navigation
-          photosHook={photos}
-          pairing={pairing}
-          notifications={notifications}
-        />
+        <Navigation colorScheme={colorScheme} />
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
 
-const s = StyleSheet.create({
-  splash: { flex:1, alignItems:'center', justifyContent:'center', backgroundColor:'#f2f2f7' },
+const styles = StyleSheet.create({
+  splash: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f8fafc',
+  },
+  darkBg: {
+    backgroundColor: '#0f172a',
+  },
 });
