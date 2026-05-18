@@ -1,0 +1,57 @@
+# ── Node ─────────────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── React Native ──────────────────────────────────────────────────────────────
+.expo/
+.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# ── iOS ───────────────────────────────────────────────────────────────────────
+ios/Pods/
+ios/build/
+ios/*.xcworkspace/xcuserdata/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/project.xcworkspace/xcuserdata/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ── Firebase ──────────────────────────────────────────────────────────────────
+# 這兩個檔案含有私鑰，絕對不能上傳
+google-services.json
+GoogleService-Info.plist
+.firebaserc
+firebase-debug.log
+functions/node_modules/
+
+# ── Environment ───────────────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Detox ─────────────────────────────────────────────────────────────────────
+e2e/artifacts/
+
+# ── Metro bundler cache ───────────────────────────────────────────────────────
+.metro-health-check*
