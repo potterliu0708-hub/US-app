@@ -3,6 +3,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { Appearance } from 'react-native';
+
 import FeedScreen from '../screens/FeedScreen';
 import AlbumScreen from '../screens/AlbumScreen';
 import SettingsScreen from '../screens/SettingsScreen';
@@ -27,6 +28,7 @@ export const Navigation = ({ colorScheme }) => {
             backgroundColor: isDark ? '#0f172a' : '#ffffff',
           },
           headerTintColor: isDark ? '#f1f5f9' : '#0f172a',
+          headerTitleStyle: { fontWeight: '700' },
         }}
       >
         <Tab.Screen 
